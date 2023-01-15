@@ -13,26 +13,20 @@ const images = [
   },
 ];
 
-const imageList = document.querySelector(".gallery");
-imageList.append(...createImageGallery(images));
-imageList.style.listStyle = "none";
-imageList.style.padding = "0px";
-imageList.style.display = "flex";
-imageList.style.gap = "10px";
+const imageListElement = document.querySelector("ul");
+const element = images
+  .map(function ({ url, alt }) {
+    return `<li><img src = '${url}' alt = '${alt}' width="320"></li>`;
+  })
+  .join("");
+imageListElement.insertAdjacentHTML("afterbegin", element);
 
-console.log(imageList.style);
+document.body.style.margin = '10px';
 
-function createImageGallery(images) {
-  return images.map((imageObject) => {
-    const li = document.createElement("li");
-    const image = document.createElement("img");
-    image.src = imageObject.url;
-    image.alt = imageObject.alt;
-    image.style.width = `360px`;
-    image.style.height = `240px`;
-    li.append(image);
-    return li;
-  });
-}
-
-console.log(imageList);
+imageListElement.style.cssText = `display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 10px;
+  padding: 20px;
+  `;
